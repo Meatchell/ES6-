@@ -30,14 +30,42 @@ bar(); // 报错
     
 - 变量的解构赋值
     1. 数组的结构赋值
-    ``` 
-        var [a,b,c] = [1,2,3]
-        a //1
-        b //2
-        c //3
-        
-        let [a,[[b],[c]]] = [1,[[2],[3]]]
-        a //1
-    ```
+        - 解构完全成功的状态
+        <pre> 
+            var [a,b,c] = [1,2,3]
+            a //1
+            b //2
+            c //3
+            
+            let [a,[[b],[c]]] = [1,[[2],[3]]]
+            a //1
+            
+            let [,,third] = ['foo',bar','baz'];
+            thira //baz
+            
+            let [head,...tail] = [1,2,3,4];
+            head //1
+            tail //[2,3,4]
+            如果解构不成功，变量的值等于undefined；
+            let [a,b] = [1,2,3];
+        </pre>
+        - 解构只能用于数组和对象，其他原始类型的值都可以转换为对象，但undefined 和 null 不行
+        ```
+            let [foo] = null //报错
+            let [foo] = undefined //报错
+        ```
+        - 数组的解构赋值允许制定默认值
+        <pre>
+            var [too = true] = [];
+            too //true
+            
+            let [x,y='b'] = ['a',undefined];
+            x //a
+            y //b
+            
+            const [x] = [null]
+            x //null
+            
+        </pre>
 
     
