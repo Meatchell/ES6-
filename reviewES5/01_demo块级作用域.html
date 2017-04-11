@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="color"/>
+<script>
+    var fn = [];
+    for(var i = 0; i<10; i++){
+        fn[i] = function(){
+            console.log(i);
+        }
+    }
+//    fn[11]();
+//    fn[10]();
+    fn[9](); //10
+    fn[8](); //10
+
+    let func = [];
+    for(let i = 0; i < 10; i++){
+        func[i] = function(){
+            console.log(i)
+        }
+    }
+    func[9](); //10
+    func[8](); //10
+
+//    隐蔽死区
+
+    function bar(y=2,x=y){ //颠倒顺序报错
+        return [x, y];
+    }
+    console.log(bar()); // 报错
+
+    let foo = outer;
+
+
+</script>
+
+</body>
+</html>
