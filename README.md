@@ -13,10 +13,10 @@
     3. 在代码块内使用let命令声明变量之前，该变量都是不可用的。在语法上称为“暂时性死区”（temporal dead zone 简称 “TDZ”）。
     ```
     隐蔽死区
-function bar(x=y, y=2){
-  return [x, y];
-}
-bar(); // 报错
+    function bar(x=y, y=2){
+         return [x, y];
+    }
+    bar(); // 报错
     ```
     
 - 全局对象属性
