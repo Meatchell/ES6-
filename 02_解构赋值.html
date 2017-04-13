@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var {foo:baz} = {foo:'a',bar:'b'};
+    console.log(baz);
+//    console.log(foo)
+
+    let { log,sin,cos} = Math;
+    console.log(log,sin,cos)
+
+    var jsonData = {
+        id:43,
+        status:'OK',
+        data:{'name':'Meatchell','age':'man'}
+    }
+    let { id, status, data:obj} = jsonData;
+
+    console.log(id,status,obj)
+</script>
+</body>
+</html>

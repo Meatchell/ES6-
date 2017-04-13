@@ -64,8 +64,111 @@ bar(); // 报错
             y //b
             
             const [x] = [null]
-            x //null
-            
+            x //null  
         </pre>
-
-    
+        - todo Set结构也可以使用数组的结构赋值
+        ```
+        let [a,b,c] = new Set(['a','b','c'])
+        a //a
+        ```
+    2. 对象的解构赋值
+        - 对象没有次序，变量必须与属性同名，才能取到正确的值。
+        ```
+        var {foo,bar} = {foo:'a',bar:'b'}
+        foo //a
+        bar //b
+        let {foo,bar} = {bar:'b',foo:'a'};
+        foo //a
+        bar //b
+        ```
+        - 对象的解构赋值的内部机制，是先找到同名属性，然后在赋给对应的变量。真正被赋值的是后者，而不是前者。
+        ```
+        var {foo:baz} = {foo:'a',fcc:'b'};
+        baz //a
+        foo // foo is not defined;  真正被赋值的变量式baz 而不是模式foo
+        ```
+        - 嵌套
+        ```
+        var node = {
+            loc: {
+                start: {
+                    line:1,
+                    column:5
+                }
+            }
+        } 
+        var { loc: { start: { line }}} = node;
+        line //1
+        只有line 是变量， loc 和start 都是模式，不会被赋值
+        ```
+        - 注意——默认值生效的条件是，对象的属性值严格等于undefined--为避免js 将`{}`理解成代码块，应避免大括号出现在行首
+        ```
+            var {x,y = 5} = {x:1};
+            x //1
+            y //5
+            var {x = 3} = {x:undefined};
+            x //3
+            var {x = 3} = {x:unll};
+            x //null  
+            ——————————————————————————————————————
+            var x;
+            {x} = {x:1} //syntax error
+            //正确写法
+            ({x} = {x:1}:
+            ——————————
+            *let{ log,sin,cos} = Math;
+        ```
+    3. 用途
+        - 变量的交换
+        ```
+        [x,y]= [y,x];
+        ```
+        - 从函数返回对个数值
+        ```
+        //返回一个数组
+        function example(){
+            return [1,2,3]
+        }
+        var [a,b,c] = example();
+         ——————
+         //返回一个对象
+         function example(){
+            return {
+                foo:a,
+                fcc:b
+            }
+         }
+         var {foo,fcc} = example()
+        ```
+        - 函数参数的定义
+        ```
+        //有序
+        function fn([x,y,z]){...}
+        fn([1,2,3]);
+        //无序
+        function fn({x,y,z}){...}
+        fun({x:3,y:2,z:1})
+        ```
+        - 提取JSON数据
+        ```
+        var jsonData = {
+            id:43,
+            status:'OK',
+            data:{'name':'Meatchell','age':'man'}
+        }
+        let { id, status, data.obj} = jsonData;
+        ```
+        - 函数参数的默认值
+        ```
+        jQuery.ajax = function(url,{
+        async = true,
+        beforeSend = function(){...},
+        cache = true,
+        complete = function(...){},
+        crossDomain = false,
+        // ...more config
+        }){
+        // ...do stuff
+        }
+        ```
+   
